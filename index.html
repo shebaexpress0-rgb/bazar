@@ -686,3 +686,284 @@ window.addEventListener('hashchange', async () => {
 </script>
 </body>
 </html>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>মাসিক বাজার</title>
+<style>
+:root{--g:#15803d;--gd:#0f5e2c;--bg:#fbf8ee;--c:#fffdf6;--b:#e3e0cc;--t:#1c1c1c;--m:#6b6b5e;--r:#c0392b}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--t);padding-bottom:130px}
+.wrap{max-width:720px;margin:auto;padding:0 14px}
+header{background:var(--g);color:#fff;padding:12px 0}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hd b{font-size:19px;display:block}.hd small{opacity:.9;font-size:12px}
+.hd button{background:#fff;color:var(--g);border:0;border-radius:20px;padding:8px 12px;font:inherit;font-size:13px;font-weight:600}
+.demo{background:#fff3cd;color:#664d03;font-size:12px;padding:6px 14px;text-align:center}
+h2{font-size:17px;margin:20px 0 8px}h3{margin:0 0 8px}h4{margin:14px 0 6px}
+.mut{color:var(--m);font-size:14px}small{color:var(--m)}
+.note{background:#e8f5e9;border:1px solid #c8e6c9;border-radius:10px;padding:10px;margin-top:12px;font-size:14px}
+.pk{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+.pkc{flex:0 0 170px;background:var(--c);border:1px solid var(--b);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.pkc b{font-size:15px}
+.pkc button{margin-top:6px}
+button{font:inherit;cursor:pointer}
+.btn,.pkc button,.btn2{background:var(--g);color:#fff;border:0;border-radius:10px;padding:10px 12px;font-weight:600}
+.btn2{width:100%;background:none;border:1.5px dashed var(--g);color:var(--g);margin-top:8px}
+.btn.sec,.sec{background:none;border:1.5px solid var(--g);color:var(--g)}
+.btn.red,.red{background:none;border:1.5px solid var(--r);color:var(--r)}
+.lnk{background:none;border:0;color:var(--g);text-decoration:underline;font-size:14px}
+.sech{display:flex;justify-content:space-between;align-items:center}
+.flt{display:flex;gap:8px;margin:6px 0 10px}
+.flt input{flex:2}.flt select{flex:1}
+input,select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--b);border-radius:12px;font:inherit;background:var(--c);color:var(--t)}
+input[type=checkbox]{width:auto}
+label{display:block;font-size:14px;margin:10px 0 4px}
+.row{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:10px;margin-bottom:8px}
+.row.hide{display:none}
+.r1{display:flex;align-items:center;gap:8px}
+.r1 b{flex:1}
+.no{background:#ede7f6;border-radius:8px;min-width:26px;text-align:center;font-size:13px;padding:2px 0}
+.r1 button{background:none;border:0;font-size:18px}
+.r2{margin:8px 0}
+.r3{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center}
+.q{display:flex;align-items:center;gap:6px}
+.q button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--g);background:none;color:var(--g);font-size:19px;line-height:1}
+.q input{width:72px;text-align:center;padding:8px}
+.r3 select{width:100%}
+.lt{grid-column:1/-1;text-align:right;font-size:14px;color:var(--gd);font-weight:600}
+.lt.p{color:var(--m);font-weight:400}
+.sum{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:12px;margin:12px 0}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--b);padding:8px 0 10px;z-index:5}
+.tt{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}
+.wa{width:100%;background:#16a34a;color:#fff;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:700}
+.two{display:flex;gap:8px;margin-top:8px}.two>*{flex:1}
+.oc{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:12px;margin-bottom:10px;font-size:14px}
+.oc ul{margin:6px 0;padding-left:20px}
+.oh{display:flex;justify-content:space-between}
+.tabs{display:flex;gap:6px;margin:14px 0;overflow-x:auto}
+.tabs button{flex:1;white-space:nowrap;padding:10px;border-radius:10px;border:1.5px solid var(--g);background:none;color:var(--g);font-weight:600}
+.tabs button.on{background:var(--g);color:#fff}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.md{background:var(--bg);width:100%;max-width:720px;max-height:90vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px}
+.mb{display:flex;gap:8px;margin-top:14px}.mb>*{flex:1}
+.ir{border:1px solid var(--b);border-radius:12px;padding:8px;margin-bottom:8px;display:grid;gap:6px;grid-template-columns:1fr 1fr}
+.ir .f{grid-column:1/-1}
+.pi{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--b)}
+.pi.hide{display:none}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:150px;background:#222;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;z-index:30;max-width:90%}
+footer{text-align:center;margin:24px 0;font-size:13px}
+footer a{color:var(--m)}
+.badge{display:inline-block;border-radius:10px;padding:2px 8px;font-size:12px;background:#e8f5e9;color:var(--gd)}
+.dh{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;font-size:20px;color:var(--m);padding:2px 6px}
+.row.drag{position:relative;z-index:3;box-shadow:0 8px 22px rgba(0,0,0,.25);opacity:.95}
+.row.ins{box-shadow:0 -4px 0 var(--g)}.row.ins-end{box-shadow:0 4px 0 var(--g)}
+.cg{background:var(--c);border:1px solid var(--b);border-radius:14px;margin-bottom:8px;padding:0 12px}
+.cg[hidden]{display:none}
+.cg summary{padding:12px 0;font-weight:600;cursor:pointer}
+.cg .pi:last-child{border-bottom:0}
+.cb{padding:7px 12px;white-space:nowrap}
+.cb.in{background:none;border:1.5px solid var(--g);color:var(--g)}
+
+.welcome{margin:15px 0 18px;padding:17px;border-radius:16px;background:linear-gradient(120deg,#e5f3e8,#f5faf3);display:flex;align-items:center;justify-content:space-between;border:1px solid #d5e8d9}.welcome b{display:block;font-size:16px;color:#145b37}.welcome small{display:block;font-size:12px;margin-top:5px}.welcome span{font-size:34px}
+/* ===== মাসিক বাজার: নতুন মোবাইল-ফার্স্ট ওয়েব ডিজাইন ===== */
+:root{--g:#167447;--gd:#105c38;--bg:#f5f7f3;--c:#fff;--b:#e5eae4;--t:#17251d;--m:#68766d;--r:#c0392b}
+body{background:var(--bg);color:var(--t);font-family:system-ui,"Noto Sans Bengali",sans-serif;padding-bottom:118px}
+.wrap{max-width:760px;padding:0 16px}
+header{background:linear-gradient(115deg,#12643d,#218653);padding:15px 0;box-shadow:0 2px 12px #173c2518}
+.hd b{font-size:21px;letter-spacing:-.3px}.hd small{display:block;margin-top:2px;font-size:12px}
+h2{font-size:18px;font-weight:750;margin:23px 0 11px;color:#1b3426}
+.sech{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:24px}
+.sech h2{margin:0 0 10px}.mut,small{color:var(--m)}
+.note{background:#fff8df;border:1px solid #f0dfaa;border-radius:13px;padding:12px;margin:14px 0;font-size:13px}
+.pk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pkc{background:#fff;border:1px solid var(--b);border-radius:16px;padding:14px;box-shadow:0 2px 8px #1c39200a;display:flex;flex-direction:column;gap:6px}
+.pkc b{font-size:15px;color:#183b28}.pkc small{font-size:12px}
+.pkc button{margin-top:5px;border:0;border-radius:10px;background:#e8f4ec;color:#12643d;font-weight:700;padding:10px;font:inherit;font-size:13px}
+.flt{display:grid;grid-template-columns:1fr 130px;gap:8px;margin:9px 0 13px}
+input,select,textarea{font:inherit;border:1px solid #dce4dc;border-radius:11px;background:#fff;padding:11px;color:var(--t);min-width:0;max-width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid #a8d5b8;border-color:#218653}
+#listBox{display:grid;gap:9px}
+.market-row{background:#fff;border:1px solid var(--b);border-radius:15px;padding:11px 12px;box-shadow:0 2px 7px #1c392008}
+.r1{display:flex;align-items:center;gap:8px}.r1 b{font-size:14px;flex:1}
+.r1 button{border:0;background:#fff0ef;color:#b33b32;border-radius:8px;width:30px;height:30px}
+.no{font-size:11px;color:#7b887f;background:#f1f4f1;border-radius:6px;padding:3px 6px}
+.prod-icon{width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;background:#f0f6ef;border-radius:11px;font-size:21px;flex-shrink:0}
+.r2{margin:8px 0 7px 46px}.r2 input{width:100%;padding:8px 10px;font-size:12px}
+.r3{display:flex;align-items:center;gap:8px;margin-left:46px;flex-wrap:wrap}
+.q{display:flex;align-items:center;border:1px solid #dce4dc;border-radius:10px;overflow:hidden;background:#fff}
+.q button{border:0;background:#edf5ef;color:#176640;width:31px;height:35px;font-size:19px;font-weight:700}
+.q input{width:48px;text-align:center;border:0;border-radius:0;padding:5px;font-size:14px}
+.r3 select{padding:8px;font-size:12px;max-width:90px}.lt{font-size:12px;font-weight:700;color:#176640;margin-left:auto}
+.cg{background:#fff;border:1px solid var(--b);border-radius:15px;margin:9px 0;overflow:hidden}
+.cg summary{padding:14px 15px;display:flex;justify-content:space-between;align-items:center;font-weight:750;color:#1b432c;cursor:pointer;list-style:none}
+.cg summary::-webkit-details-marker{display:none}.cg summary:after{content:"⌄";font-size:18px;color:#64816d}
+.cg summary small{font-weight:500;font-size:11px;margin-left:auto;margin-right:9px}
+.catalog-grid{padding:0 10px 10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.pi.product-card{display:flex;align-items:center;gap:8px;padding:9px;border:1px solid #edf0eb;border-radius:12px;min-width:0}
+.product-card .prod-icon{width:34px;height:34px;font-size:18px}
+.product-info{min-width:0;flex:1}.product-info b{display:block;font-size:12px;line-height:1.4}.product-info small{font-size:10px;display:block;margin-top:3px;line-height:1.35}
+.product-card .cb{width:29px;height:29px;min-width:29px;border-radius:9px;padding:0;font-size:20px}
+.btn,.btn2{border:0;border-radius:12px;padding:12px 15px;font:inherit;font-weight:700}
+.btn2{width:100%;background:#edf5ef;color:#176640;margin:10px 0}
+label{display:block;font-size:13px;font-weight:650;margin:12px 0 5px}
+#app main.wrap>input,#app main.wrap>textarea,#app main.wrap>select{width:100%}
+.sum{background:#eff6f0;border:1px solid #dcebdd;border-radius:15px;padding:14px;margin:14px 0}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--b);padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:10;box-shadow:0 -4px 18px #1c392010}
+.bottom .wrap{display:flex;align-items:center;gap:12px}.tt{flex:1;min-width:0}.tt span{display:block;font-size:11px;color:var(--m)}.tt b{font-size:15px}
+.wa{background:#16834c;color:#fff;border:0;border-radius:12px;padding:13px 16px;font:inherit;font-size:14px;font-weight:750;white-space:nowrap;box-shadow:0 3px 9px #16834c30}
+.empty{background:#fff;border:1px dashed #cbd9ce;border-radius:15px;padding:22px;text-align:center;display:grid;justify-items:center;gap:7px}
+.empty span{font-size:30px}.empty b{font-size:14px}.empty small{font-size:12px;max-width:260px}
+.two{display:flex;gap:8px}.two>*{flex:1}
+footer{padding:20px}
+@media(max-width:390px){.wrap{padding:0 11px}.catalog-grid{grid-template-columns:1fr}.flt{grid-template-columns:1fr 112px}.pkc{padding:11px}.r3{margin-left:0}.r2{margin-left:46px}.bottom .wrap{gap:8px}.wa{padding:12px 10px;font-size:12px}}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="mdroot"></div>
+<div id="toast"></div>
+
+<script>
+/* ============ এখানে আপনার তথ্য বসান ============ */
+const FIREBASE_CONFIG = { apiKey:"", authDomain:"", projectId:"", appId:"" }; // Firebase থেকে পাওয়া কোড (খালি থাকলে ডেমো মোড)
+const ADMIN_EMAILS = ["admin@example.com"];   // আপনার Gmail ঠিকানা (firestore.rules-এও একই ঠিকানা দিন)
+const DEFAULT_WHATSAPP = "8801631421995"; // ব্যবহারকারীর নিশ্চিত করা অর্ডার WhatsApp নম্বর     // WhatsApp নম্বর (দেশের কোডসহ, + ছাড়া)
+const STATIC = true;  // true = সহজ ভার্সন (লগইন/অ্যাডমিন নেই, পণ্য-দাম এই ফাইলেই)
+/* ================================================ */
+
+
+/* ============ পণ্য, দাম ও প্যাকেজ: এখানে বদলাবেন (দাম 0 মানে "দাম পরে নিশ্চিত হবে") ============ */
+const SHOP = {brand:'মাসিক বাজার', tagline:'ঘরে ঘরে মাসিক বাজার', whatsapp:DEFAULT_WHATSAPP, note:''};
+// [নাম, ক্যাটাগরি, একক, প্রতি এককে দাম, [ব্র্যান্ড...]]
+const SHOP_PRODUCTS = [
+ ['চাল','চাল-ডাল','কেজি',0,[]],['মসুর ডাল','চাল-ডাল','কেজি',0,[]],['মুগ ডাল','চাল-ডাল','কেজি',0,[]],['ছোলা','চাল-ডাল','কেজি',0,[]],
+ ['আটা','চাল-ডাল','কেজি',0,[]],['ময়দা','চাল-ডাল','কেজি',0,[]],['সুজি','চাল-ডাল','কেজি',0,[]],
+ ['সয়াবিন তেল','তেল-মসলা','লিটার',0,[]],['চিনি','তেল-মসলা','কেজি',0,[]],['লবণ','তেল-মসলা','কেজি',0,[]],
+ ['হলুদ গুঁড়া','তেল-মসলা','কেজি',0,[]],['মরিচ গুঁড়া','তেল-মসলা','কেজি',0,[]],['জিরা','তেল-মসলা','কেজি',0,[]],['ধনিয়া গুঁড়া','তেল-মসলা','কেজি',0,[]],
+ ['পেঁয়াজ','সবজি','কেজি',0,[]],['রসুন','সবজি','কেজি',0,[]],['আদা','সবজি','কেজি',0,[]],['আলু','সবজি','কেজি',0,[]],['ডিম','সবজি','হালি',0,[]],
+ ['সাবান','পরিষ্কার-পরিচ্ছন্নতা','পিস',0,[]],['ডিটারজেন্ট পাউডার','পরিষ্কার-পরিচ্ছন্নতা','কেজি',0,[]],['থালা-বাসন মাজার লিকুইড','পরিষ্কার-পরিচ্ছন্নতা','পিস',0,[]]
+];
+// [নাম, কত জন, [[পণ্যের নাম, পরিমাণ, একক], ...]]
+const SHOP_PACKAGES = [
+ ['২ জনের পরিবার',2,[['চাল',10,'কেজি'],['মসুর ডাল',1,'কেজি'],['সয়াবিন তেল',2,'লিটার'],['চিনি',1,'কেজি'],['লবণ',1,'কেজি'],['পেঁয়াজ',2,'কেজি'],['আলু',3,'কেজি'],['হলুদ গুঁড়া',100,'গ্রাম'],['মরিচ গুঁড়া',100,'গ্রাম']]],
+ ['৪ জনের পরিবার',4,[['চাল',20,'কেজি'],['মসুর ডাল',2,'কেজি'],['সয়াবিন তেল',4,'লিটার'],['চিনি',2,'কেজি'],['আটা',2,'কেজি'],['লবণ',1,'কেজি'],['পেঁয়াজ',4,'কেজি'],['রসুন',500,'গ্রাম'],['আদা',500,'গ্রাম'],['আলু',5,'কেজি'],['ডিম',3,'হালি'],['হলুদ গুঁড়া',200,'গ্রাম'],['মরিচ গুঁড়া',200,'গ্রাম']]],
+ ['৬ জনের পরিবার',6,[['চাল',30,'কেজি'],['মসুর ডাল',3,'কেজি'],['মুগ ডাল',1,'কেজি'],['সয়াবিন তেল',5,'লিটার'],['চিনি',3,'কেজি'],['আটা',3,'কেজি'],['লবণ',2,'কেজি'],['পেঁয়াজ',6,'কেজি'],['রসুন',1000,'গ্রাম'],['আদা',1000,'গ্রাম'],['আলু',8,'কেজি'],['ডিম',5,'হালি'],['সাবান',4,'পিস'],['ডিটারজেন্ট পাউডার',1,'কেজি'],['হলুদ গুঁড়া',300,'গ্রাম'],['মরিচ গুঁড়া',300,'গ্রাম'],['জিরা',200,'গ্রাম']]]
+];
+/* ============================================================================================ */
+
+const DEMO = !FIREBASE_CONFIG.apiKey;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => Number(n).toLocaleString('bn-BD');
+const nid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const r3 = x => Math.round(x * 1000) / 1000;
+const LS = {
+  get:(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  del:k=>{try{localStorage.removeItem(k)}catch(e){}}
+};
+
+/* ---------- একক ---------- */
+const UNITS = {'গ্রাম':['w',.001],'কেজি':['w',1],'মিলি':['v',.001],'লিটার':['v',1],'পিস':['c',1],'হালি':['c',4],'ডজন':['c',12],'প্যাকেট':['p',1],'বোতল':['b',1],'কৌটা':['k',1]};
+const STEP = {'গ্রাম':50,'মিলি':50,'কেজি':.5,'লিটার':.5};
+const stepOf = u => STEP[u] || 1;
+const unitOpts = (u, sel, all) => Object.keys(UNITS).filter(k => all || !UNITS[u] || UNITS[k][0] === UNITS[u][0]).map(k => `<option ${k===sel?'selected':''}>${k}</option>`).join('');
+function lineTotal(it){
+  if(!it.price || !it.punit) return null;
+  const a = UNITS[it.unit], b = UNITS[it.punit];
+  if(!a || !b || a[0] !== b[0]) return null;
+  return Math.round(it.qty * a[1] / b[1] * it.price);
+}
+const STATUSES = ['নতুন','নিশ্চিত','ডেলিভারি হয়েছে','বাতিল'];
+
+/* ---------- ব্যাকএন্ড (Firebase বা ডেমো) ---------- */
+let fb = null;
+async function initBackend(){
+  if(DEMO) return;
+  const v = '10.12.2', base = `https://www.gstatic.com/firebasejs/${v}/`;
+  const [A, F, Au] = await Promise.all([import(base+'firebase-app.js'), import(base+'firebase-firestore.js'), import(base+'firebase-auth.js')]);
+  const app = A.initializeApp(FIREBASE_CONFIG);
+  fb = {F, Au, db:F.getFirestore(app), auth:Au.getAuth(app)};
+}
+async function dbList(col, o = {}){
+  if(DEMO){
+    let a = Object.entries(LS.get('d_'+col, {})).map(([id,v]) => ({id, ...v}));
+    if(o.where) a = a.filter(x => x[o.where[0]] === o.where[2]);
+    if(o.orderBy) a.sort((x,y) => y[o.orderBy] - x[o.orderBy]);
+    if(o.limit) a = a.slice(0, o.limit);
+    return a;
+  }
+  const F = fb.F, c = [];
+  if(o.where) c.push(F.where(...o.where));
+  if(o.orderBy) c.push(F.orderBy(o.orderBy, 'desc'));
+  if(o.limit) c.push(F.limit(o.limit));
+  const s = await F.getDocs(F.query(F.collection(fb.db, col), ...c));
+  return s.docs.map(d => ({id:d.id, ...d.data()}));
+}
+async function dbSet(col, id, data){
+  const {id:_x, ...d} = data; const clean = JSON.parse(JSON.stringify(d));
+  if(DEMO){const o = LS.get('d_'+col, {}); o[id] = clean; LS.set('d_'+col, o); return}
+  await fb.F.setDoc(fb.F.doc(fb.db, col, id), clean);
+}
+async function dbPatch(col, id, patch){
+  if(DEMO){const o = LS.get('d_'+col, {}); o[id] = {...o[id], ...patch}; LS.set('d_'+col, o); return}
+  await fb.F.updateDoc(fb.F.doc(fb.db, col, id), patch);
+}
+async function dbDel(col, id){
+  if(DEMO){const o = LS.get('d_'+col, {}); delete o[id]; LS.set('d_'+col, o); return}
+  await fb.F.deleteDoc(fb.F.doc(fb.db, col, id));
+}
+
+/* ---------- অবস্থা ---------- */
+const draft = LS.get('draft', {});
+const S = {
+  settings:{brand:'মাসিক বাজার', tagline:'ঘরে ঘরে মাসিক বাজার', whatsapp:DEFAULT_WHATSAPP, note:''},
+  products:[], packages:[], orders:[], myOrders:[],
+  list: draft.list || [], pkgName: draft.pkgName || '',
+  view:'home', tab:'orders', ofilter:'', edit:null, picker:false,
+  cust: LS.get('cust', {name:'', phone:'', address:'', day:'যত দ্রুত সম্ভব', note:''})
+};
+let user = null;
+const isAdmin = () => !!user && ADMIN_EMAILS.map(e => e.toLowerCase()).includes(String(user.email||'').toLowerCase());
+const saveDraft = () => LS.set('draft', {list:S.list, pkgName:S.pkgName});
+function toast(m){const t=$('#toast'); t.innerHTML=`<div class="toast">${esc(m)}</div>`; clearTimeout(toast.t); toast.t=setTimeout(()=>t.innerHTML='',2800)}
+
+/* ---------- ডেটা লোড ---------- */
+async function loadPublic(){
+  if(STATIC){
+    S.products = SHOP_PRODUCTS.map((p,i) => ({id:'p'+(i+1), name:p[0], cat:p[1], unit:p[2], price:p[3], brands:p[4], active:true}));
+    S.packages = SHOP_PACKAGES.map((k,i) => ({id:'k'+(i+1), name:k[0], members:k[1], active:true, items:k[2].map(r => { const pr = S.products.find(x => x.name === r[0]); return {pid:pr?pr.id:'', name:r[0], brand:'', qty:r[1], unit:r[2]} })}));
+    S.settings = {...S.settings, ...SHOP}; document.title = S.settings.brand;
+    S.list.forEach(it => { const pr = S.products.find(x => x.id === it.pid); if(pr){ it.price = pr.price; it.punit = pr.unit; it.name = pr.name; it.cat = pr.cat || '' } });
+    return;
+  }
+  const [pr, pk, st] = await Promise.all([dbList('products'), dbList('packages'), dbList('settings')]);
+  S.products = pr.sort((a,b) => (a.cat||'').localeCompare(b.cat||'','bn') || a.name.localeCompare(b.name,'bn'));
+  S.packages = pk.sort((a,b) => (a.members||0) - (b.members||0));
+  const m = st.find(x => x.id === 'main'); if(m) S.settings = {...S.settings, ...m};
+  document.title = S.settings.brand;
+}
+async function loadOrdersAdmin(){ try{S.orders = await dbList('orders',{orderBy:'createdAt',limit:300})}catch(e){toast('অর্ডার লোড হয়নি: '+(e.code||e.message))} }
+async function loadMine(){
+  if(user){ try{S.myOrders = (await dbList('orders',{where:['uid','==',user.uid]})).sort((a,b)=>b.createdAt-a.createdAt).slice(0,10)}catch(e){S.myOrders=[]} }
+  else S.myOrders = LS.get('myorders', []);
+}
+
+/* ---------- লগইন ---------- */
+async function login(asAdmin){
+  if(DEMO){
+    user = asAdmin ? {uid:'demo-admin', name:'ডেমো অ্যাডমিন', email:ADMIN_EMAILS[0]} : {uid:'demo-user', name:'ডেমো গ্রাহক', email:'demo@example.com'};
+    LS.set('d_user', user); await onAuth(); return;
+  }
+  try{ await fb.Au.signInWithPopup(fb.auth, new fb.Au.GoogleAuthProvider()) }
+  catch(e){ toast('লগইন হয়নি: ' + (e.code || e.message)) }
+}
+async function logout(){
+  if(DEMO){ user = null; LS.del('d_user'); await onAuth(); return }
+  await fb.Au.signOut(fb.auth);
+}
+async function onAut
