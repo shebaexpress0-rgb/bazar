@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>মাসিক বাজার</title>
+<style>
+:root{--g:#15803d;--gd:#0f5e2c;--bg:#fbf8ee;--c:#fffdf6;--b:#e3e0cc;--t:#1c1c1c;--m:#6b6b5e;--r:#c0392b}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:var(--bg);color:var(--t);padding-bottom:130px}
+.wrap{max-width:720px;margin:auto;padding:0 14px}
+header{background:var(--g);color:#fff;padding:12px 0}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hd b{font-size:19px;display:block}.hd small{opacity:.9;font-size:12px}
+.hd button{background:#fff;color:var(--g);border:0;border-radius:20px;padding:8px 12px;font:inherit;font-size:13px;font-weight:600}
+.demo{background:#fff3cd;color:#664d03;font-size:12px;padding:6px 14px;text-align:center}
+h2{font-size:17px;margin:20px 0 8px}h3{margin:0 0 8px}h4{margin:14px 0 6px}
+.mut{color:var(--m);font-size:14px}small{color:var(--m)}
+.note{background:#e8f5e9;border:1px solid #c8e6c9;border-radius:10px;padding:10px;margin-top:12px;font-size:14px}
+.pk{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+.pkc{flex:0 0 170px;background:var(--c);border:1px solid var(--b);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.pkc b{font-size:15px}
+.pkc button{margin-top:6px}
+button{font:inherit;cursor:pointer}
+.btn,.pkc button,.btn2{background:var(--g);color:#fff;border:0;border-radius:10px;padding:10px 12px;font-weight:600}
+.btn2{width:100%;background:none;border:1.5px dashed var(--g);color:var(--g);margin-top:8px}
+.btn.sec,.sec{background:none;border:1.5px solid var(--g);color:var(--g)}
+.btn.red,.red{background:none;border:1.5px solid var(--r);color:var(--r)}
+.lnk{background:none;border:0;color:var(--g);text-decoration:underline;font-size:14px}
+.sech{display:flex;justify-content:space-between;align-items:center}
+.flt{display:flex;gap:8px;margin:6px 0 10px}
+.flt input{flex:2}.flt select{flex:1}
+input,select,textarea{width:100%;padding:11px 12px;border:1.5px solid var(--b);border-radius:12px;font:inherit;background:var(--c);color:var(--t)}
+input[type=checkbox]{width:auto}
+label{display:block;font-size:14px;margin:10px 0 4px}
+.row{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:10px;margin-bottom:8px}
+.row.hide{display:none}
+.r1{display:flex;align-items:center;gap:8px}
+.r1 b{flex:1}
+.no{background:#ede7f6;border-radius:8px;min-width:26px;text-align:center;font-size:13px;padding:2px 0}
+.r1 button{background:none;border:0;font-size:18px}
+.r2{margin:8px 0}
+.r3{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center}
+.q{display:flex;align-items:center;gap:6px}
+.q button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--g);background:none;color:var(--g);font-size:19px;line-height:1}
+.q input{width:72px;text-align:center;padding:8px}
+.r3 select{width:100%}
+.lt{grid-column:1/-1;text-align:right;font-size:14px;color:var(--gd);font-weight:600}
+.lt.p{color:var(--m);font-weight:400}
+.sum{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:12px;margin:12px 0}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--b);padding:8px 0 10px;z-index:5}
+.tt{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}
+.wa{width:100%;background:#16a34a;color:#fff;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:700}
+.two{display:flex;gap:8px;margin-top:8px}.two>*{flex:1}
+.oc{background:var(--c);border:1px solid var(--b);border-radius:14px;padding:12px;margin-bottom:10px;font-size:14px}
+.oc ul{margin:6px 0;padding-left:20px}
+.oh{display:flex;justify-content:space-between}
+.tabs{display:flex;gap:6px;margin:14px 0;overflow-x:auto}
+.tabs button{flex:1;white-space:nowrap;padding:10px;border-radius:10px;border:1.5px solid var(--g);background:none;color:var(--g);font-weight:600}
+.tabs button.on{background:var(--g);color:#fff}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.md{background:var(--bg);width:100%;max-width:720px;max-height:90vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px}
+.mb{display:flex;gap:8px;margin-top:14px}.mb>*{flex:1}
+.ir{border:1px solid var(--b);border-radius:12px;padding:8px;margin-bottom:8px;display:grid;gap:6px;grid-template-columns:1fr 1fr}
+.ir .f{grid-column:1/-1}
+.pi{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--b)}
+.pi.hide{display:none}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:150px;background:#222;color:#fff;padding:10px 16px;border-radius:20px;font-size:14px;z-index:30;max-width:90%}
+footer{text-align:center;margin:24px 0;font-size:13px}
+footer a{color:var(--m)}
+.badge{display:inline-block;border-radius:10px;padding:2px 8px;font-size:12px;background:#e8f5e9;color:var(--gd)}
+.dh{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;font-size:20px;color:var(--m);padding:2px 6px}
+.row.drag{position:relative;z-index:3;box-shadow:0 8px 22px rgba(0,0,0,.25);opacity:.95}
+.row.ins{box-shadow:0 -4px 0 var(--g)}.row.ins-end{box-shadow:0 4px 0 var(--g)}
+.cg{background:var(--c);border:1px solid var(--b);border-radius:14px;margin-bottom:8px;padding:0 12px}
+.cg[hidden]{display:none}
+.cg summary{padding:12px 0;font-weight:600;cursor:pointer}
+.cg .pi:last-child{border-bottom:0}
+.cb{padding:7px 12px;white-space:nowrap}
+.cb.in{background:none;border:1.5px solid var(--g);color:var(--g)}
+
+.welcome{margin:15px 0 18px;padding:17px;border-radius:16px;background:linear-gradient(120deg,#e5f3e8,#f5faf3);display:flex;align-items:center;justify-content:space-between;border:1px solid #d5e8d9}.welcome b{display:block;font-size:16px;color:#145b37}.welcome small{display:block;font-size:12px;margin-top:5px}.welcome span{font-size:34px}
+/* ===== মাসিক বাজার: নতুন মোবাইল-ফার্স্ট ওয়েব ডিজাইন ===== */
+:root{--g:#167447;--gd:#105c38;--bg:#f5f7f3;--c:#fff;--b:#e5eae4;--t:#17251d;--m:#68766d;--r:#c0392b}
+body{background:var(--bg);color:var(--t);font-family:system-ui,"Noto Sans Bengali",sans-serif;padding-bottom:118px}
+.wrap{max-width:760px;padding:0 16px}
+header{background:linear-gradient(115deg,#12643d,#218653);padding:15px 0;box-shadow:0 2px 12px #173c2518}
+.hd b{font-size:21px;letter-spacing:-.3px}.hd small{display:block;margin-top:2px;font-size:12px}
+h2{font-size:18px;font-weight:750;margin:23px 0 11px;color:#1b3426}
+.sech{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:24px}
+.sech h2{margin:0 0 10px}.mut,small{color:var(--m)}
+.note{background:#fff8df;border:1px solid #f0dfaa;border-radius:13px;padding:12px;margin:14px 0;font-size:13px}
+.pk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pkc{background:#fff;border:1px solid var(--b);border-radius:16px;padding:14px;box-shadow:0 2px 8px #1c39200a;display:flex;flex-direction:column;gap:6px}
+.pkc b{font-size:15px;color:#183b28}.pkc small{font-size:12px}
+.pkc button{margin-top:5px;border:0;border-radius:10px;background:#e8f4ec;color:#12643d;font-weight:700;padding:10px;font:inherit;font-size:13px}
+.flt{display:grid;grid-template-columns:1fr 130px;gap:8px;margin:9px 0 13px}
+input,select,textarea{font:inherit;border:1px solid #dce4dc;border-radius:11px;background:#fff;padding:11px;color:var(--t);min-width:0;max-width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid #a8d5b8;border-color:#218653}
+#listBox{display:grid;gap:9px}
+.market-row{background:#fff;border:1px solid var(--b);border-radius:15px;padding:11px 12px;box-shadow:0 2px 7px #1c392008}
+.r1{display:flex;align-items:center;gap:8px}.r1 b{font-size:14px;flex:1}
+.r1 button{border:0;background:#fff0ef;color:#b33b32;border-radius:8px;width:30px;height:30px}
+.no{font-size:11px;color:#7b887f;background:#f1f4f1;border-radius:6px;padding:3px 6px}
+.prod-icon{width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;background:#f0f6ef;border-radius:11px;font-size:21px;flex-shrink:0}
+.r2{margin:8px 0 7px 46px}.r2 input{width:100%;padding:8px 10px;font-size:12px}
+.r3{display:flex;align-items:center;gap:8px;margin-left:46px;flex-wrap:wrap}
+.q{display:flex;align-items:center;border:1px solid #dce4dc;border-radius:10px;overflow:hidden;background:#fff}
+.q button{border:0;background:#edf5ef;color:#176640;width:31px;height:35px;font-size:19px;font-weight:700}
+.q input{width:48px;text-align:center;border:0;border-radius:0;padding:5px;font-size:14px}
+.r3 select{padding:8px;font-size:12px;max-width:90px}.lt{font-size:12px;font-weight:700;color:#176640;margin-left:auto}
+.cg{background:#fff;border:1px solid var(--b);border-radius:15px;margin:9px 0;overflow:hidden}
+.cg summary{padding:14px 15px;display:flex;justify-content:space-between;align-items:center;font-weight:750;color:#1b432c;cursor:pointer;list-style:none}
+.cg summary::-webkit-details-marker{display:none}.cg summary:after{content:"⌄";font-size:18px;color:#64816d}
+.cg summary small{font-weight:500;font-size:11px;margin-left:auto;margin-right:9px}
+.catalog-grid{padding:0 10px 10px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.pi.product-card{display:flex;align-items:center;gap:8px;padding:9px;border:1px solid #edf0eb;border-radius:12px;min-width:0}
+.product-card .prod-icon{width:34px;height:34px;font-size:18px}
+.product-info{min-width:0;flex:1}.product-info b{display:block;font-size:12px;line-height:1.4}.product-info small{font-size:10px;display:block;margin-top:3px;line-height:1.35}
+.product-card .cb{width:29px;height:29px;min-width:29px;border-radius:9px;padding:0;font-size:20px}
+.btn,.btn2{border:0;border-radius:12px;padding:12px 15px;font:inherit;font-weight:700}
+.btn2{width:100%;background:#edf5ef;color:#176640;margin:10px 0}
+label{display:block;font-size:13px;font-weight:650;margin:12px 0 5px}
+#app main.wrap>input,#app main.wrap>textarea,#app main.wrap>select{width:100%}
+.sum{background:#eff6f0;border:1px solid #dcebdd;border-radius:15px;padding:14px;margin:14px 0}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--b);padding:10px 0 calc(10px + env(safe-area-inset-bottom));z-index:10;box-shadow:0 -4px 18px #1c392010}
+.bottom .wrap{display:flex;align-items:center;gap:12px}.tt{flex:1;min-width:0}.tt span{display:block;font-size:11px;color:var(--m)}.tt b{font-size:15px}
+.wa{background:#16834c;color:#fff;border:0;border-radius:12px;padding:13px 16px;font:inherit;font-size:14px;font-weight:750;white-space:nowrap;box-shadow:0 3px 9px #16834c30}
+.empty{background:#fff;border:1px dashed #cbd9ce;border-radius:15px;padding:22px;text-align:center;display:grid;justify-items:center;gap:7px}
+.empty span{font-size:30px}.empty b{font-size:14px}.empty small{font-size:12px;max-width:260px}
+.two{display:flex;gap:8px}.two>*{flex:1}
+footer{padding:20px}
+@media(max-width:390px){.wrap{padding:0 11px}.catalog-grid{grid-template-columns:1fr}.flt{grid-template-columns:1fr 112px}.pkc{padding:11px}.r3{margin-left:0}.r2{margin-left:46px}.bottom .wrap{gap:8px}.wa{padding:12px 10px;font-size:12px}}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="mdroot"></div>
+<div id="toast"></div>
+
+<script>
+/* ============ এখানে আপনার তথ্য বসান ============ */
+const FIREBASE_CONFIG = { apiKey:"", authDomain:"", projectId:"", appId:"" }; // Firebase থেকে পাওয়া কোড (খালি থাকলে ডেমো মোড)
+const ADMIN_EMAILS = ["admin@example.com"];   // আপনার Gmail ঠিকানা (firestore.rules-এও একই ঠিকানা দিন)
+const DEFAULT_WHATSAPP = "8801631421995"; // ব্যবহারকারীর নিশ্চিত করা অর্ডার WhatsApp নম্বর     // WhatsApp নম্বর (দেশের কোডসহ, + ছাড়া)
+const STATIC = true;  // true = সহজ ভার্সন (লগইন/অ্যাডমিন নেই, পণ্য-দাম এই ফাইলেই)
+/* ================================================ */
+
+
+/* ============ পণ্য, দাম ও প্যাকেজ: এখানে বদলাবেন (দাম 0 মানে "দাম পরে নিশ্চিত হবে") ============ */
+const SHOP = {brand:'মাসিক বাজার', tagline:'ঘরে ঘরে মাসিক বাজার', whatsapp:DEFAULT_WHATSAPP, note:''};
+// [নাম, ক্যাটাগরি, একক, প্রতি এককে দাম, [ব্র্যান্ড...]]
+const SHOP_PRODUCTS = [
+ ['চাল','চাল-ডাল','কেজি',0,[]],['মসুর ডাল','চাল-ডাল','কেজি',0,[]],['মুগ ডাল','চাল-ডাল','কেজি',0,[]],['ছোলা','চাল-ডাল','কেজি',0,[]],
+ ['আটা','চাল-ডাল','কেজি',0,[]],['ময়দা','চাল-ডাল','কেজি',0,[]],['সুজি','চাল-ডাল','কেজি',0,[]],
+ ['সয়াবিন তেল','তেল-মসলা','লিটার',0,[]],['চিনি','তেল-মসলা','কেজি',0,[]],['লবণ','তেল-মসলা','কেজি',0,[]],
+ ['হলুদ গুঁড়া','তেল-মসলা','কেজি',0,[]],['মরিচ গুঁড়া','তেল-মসলা','কেজি',0,[]],['জিরা','তেল-মসলা','কেজি',0,[]],['ধনিয়া গুঁড়া','তেল-মসলা','কেজি',0,[]],
+ ['পেঁয়াজ','সবজি','কেজি',0,[]],['রসুন','সবজি','কেজি',0,[]],['আদা','সবজি','কেজি',0,[]],['আলু','সবজি','কেজি',0,[]],['ডিম','সবজি','হালি',0,[]],
+ ['সাবান','পরিষ্কার-পরিচ্ছন্নতা','পিস',0,[]],['ডিটারজেন্ট পাউডার','পরিষ্কার-পরিচ্ছন্নতা','কেজি',0,[]],['থালা-বাসন মাজার লিকুইড','পরিষ্কার-পরিচ্ছন্নতা','পিস',0,[]]
+];
+// [নাম, কত জন, [[পণ্যের নাম, পরিমাণ, একক], ...]]
+const SHOP_PACKAGES = [
+ ['২ জনের পরিবার',2,[['চাল',10,'কেজি'],['মসুর ডাল',1,'কেজি'],['সয়াবিন তেল',2,'লিটার'],['চিনি',1,'কেজি'],['লবণ',1,'কেজি'],['পেঁয়াজ',2,'কেজি'],['আলু',3,'কেজি'],['হলুদ গুঁড়া',100,'গ্রাম'],['মরিচ গুঁড়া',100,'গ্রাম']]],
+ ['৪ জনের পরিবার',4,[['চাল',20,'কেজি'],['মসুর ডাল',2,'কেজি'],['সয়াবিন তেল',4,'লিটার'],['চিনি',2,'কেজি'],['আটা',2,'কেজি'],['লবণ',1,'কেজি'],['পেঁয়াজ',4,'কেজি'],['রসুন',500,'গ্রাম'],['আদা',500,'গ্রাম'],['আলু',5,'কেজি'],['ডিম',3,'হালি'],['হলুদ গুঁড়া',200,'গ্রাম'],['মরিচ গুঁড়া',200,'গ্রাম']]],
+ ['৬ জনের পরিবার',6,[['চাল',30,'কেজি'],['মসুর ডাল',3,'কেজি'],['মুগ ডাল',1,'কেজি'],['সয়াবিন তেল',5,'লিটার'],['চিনি',3,'কেজি'],['আটা',3,'কেজি'],['লবণ',2,'কেজি'],['পেঁয়াজ',6,'কেজি'],['রসুন',1000,'গ্রাম'],['আদা',1000,'গ্রাম'],['আলু',8,'কেজি'],['ডিম',5,'হালি'],['সাবান',4,'পিস'],['ডিটারজেন্ট পাউডার',1,'কেজি'],['হলুদ গুঁড়া',300,'গ্রাম'],['মরিচ গুঁড়া',300,'গ্রাম'],['জিরা',200,'গ্রাম']]]
+];
+/* ============================================================================================ */
+
+const DEMO = !FIREBASE_CONFIG.apiKey;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = n => Number(n).toLocaleString('bn-BD');
+const nid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const r3 = x => Math.round(x * 1000) / 1000;
+const LS = {
+  get:(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  del:k=>{try{localStorage.removeItem(k)}catch(e){}}
+};
+
+/* ---------- একক ---------- */
+const UNITS = {'গ্রাম':['w',.001],'কেজি':['w',1],'মিলি':['v',.001],'লিটার':['v',1],'পিস':['c',1],'হালি':['c',4],'ডজন':['c',12],'প্যাকেট':['p',1],'বোতল':['b',1],'কৌটা':['k',1]};
+const STEP = {'গ্রাম':50,'মিলি':50,'কেজি':.5,'লিটার':.5};
+const stepOf = u => STEP[u] || 1;
+const unitOpts = (u, sel, all) => Object.keys(UNITS).filter(k => all || !UNITS[u] || UNITS[k][0] === UNITS[u][0]).map(k => `<option ${k===sel?'selected':''}>${k}</option>`).join('');
+function lineTotal(it){
+  if(!it.price || !it.punit) return null;
+  const a = UNITS[it.unit], b = UNITS[it.punit];
+  if(!a || !b || a[0] !== b[0]) return null;
+  return Math.round(it.qty * a[1] / b[1] * it.price);
+}
+const STATUSES = ['নতুন','নিশ্চিত','ডেলিভারি হয়েছে','বাতিল'];
+
+/* ---------- ব্যাকএন্ড (Firebase বা ডেমো) ---------- */
+let fb = null;
+async function initBackend(){
+  if(DEMO) return;
+  const v = '10.12.2', base = `https://www.gstatic.com/firebasejs/${v}/`;
+  const [A, F, Au] = await Promise.all([import(base+'firebase-app.js'), import(base+'firebase-firestore.js'), import(base+'firebase-auth.js')]);
+  const app = A.initializeApp(FIREBASE_CONFIG);
+  fb = {F, Au, db:F.getFirestore(app), auth:Au.getAuth(app)};
+}
+async function dbList(col, o = {}){
+  if(DEMO){
+    let a = Object.entries(LS.get('d_'+col, {})).map(([id,v]) => ({id, ...v}));
+    if(o.where) a = a.filter(x => x[o.where[0]] === o.where[2]);
+    if(o.orderBy) a.sort((x,y) => y[o.orderBy] - x[o.orderBy]);
+    if(o.limit) a = a.slice(0, o.limit);
+    return a;
+  }
+  const F = fb.F, c = [];
+  if(o.where) c.push(F.where(...o.where));
+  if(o.orderBy) c.push(F.orderBy(o.orderBy, 'desc'));
+  if(o.limit) c.push(F.limit(o.limit));
+  const s = await F.getDocs(F.query(F.collection(fb.db, col), ...c));
+  return s.docs.map(d => ({id:d.id, ...d.data()}));
+}
+async function dbSet(col, id, data){
+  const {id:_x, ...d} = data; const clean = JSON.parse(JSON.stringify(d));
+  if(DEMO){const o = LS.get('d_'+col, {}); o[id] = clean; LS.set('d_'+col, o); return}
+  await fb.F.setDoc(fb.F.doc(fb.db, col, id), clean);
+}
+async function dbPatch(col, id, patch){
+  if(DEMO){const o = LS.get('d_'+col, {}); o[id] = {...o[id], ...patch}; LS.set('d_'+col, o); return}
+  await fb.F.updateDoc(fb.F.doc(fb.db, col, id), patch);
+}
+async function dbDel(col, id){
+  if(DEMO){const o = LS.get('d_'+col, {}); delete o[id]; LS.set('d_'+col, o); return}
+  await fb.F.deleteDoc(fb.F.doc(fb.db, col, id));
+}
+
+/* ---------- অবস্থা ---------- */
+const draft = LS.get('draft', {});
+const S = {
+  settings:{brand:'মাসিক বাজার', tagline:'ঘরে ঘরে মাসিক বাজার', whatsapp:DEFAULT_WHATSAPP, note:''},
+  products:[], packages:[], orders:[], myOrders:[],
+  list: draft.list || [], pkgName: draft.pkgName || '',
+  view:'home', tab:'orders', ofilter:'', edit:null, picker:false,
+  cust: LS.get('cust', {name:'', phone:'', address:'', day:'যত দ্রুত সম্ভব', note:''})
+};
+let user = null;
+const isAdmin = () => !!user && ADMIN_EMAILS.map(e => e.toLowerCase()).includes(String(user.email||'').toLowerCase());
+const saveDraft = () => LS.set('draft', {list:S.list, pkgName:S.pkgName});
+function toast(m){const t=$('#toast'); t.innerHTML=`<div class="toast">${esc(m)}</div>`; clearTimeout(toast.t); toast.t=setTimeout(()=>t.innerHTML='',2800)}
+
+/* ---------- ডেটা লোড ---------- */
+async function loadPublic(){
+  if(STATIC){
+    S.products = SHOP_PRODUCTS.map((p,i) => ({id:'p'+(i+1), name:p[0], cat:p[1], unit:p[2], price:p[3], brands:p[4], active:true}));
+    S.packages = SHOP_PACKAGES.map((k,i) => ({id:'k'+(i+1), name:k[0], members:k[1], active:true, items:k[2].map(r => { const pr = S.products.find(x => x.name === r[0]); return {pid:pr?pr.id:'', name:r[0], brand:'', qty:r[1], unit:r[2]} })}));
+    S.settings = {...S.settings, ...SHOP}; document.title = S.settings.brand;
+    S.list.forEach(it => { const pr = S.products.find(x => x.id === it.pid); if(pr){ it.price = pr.price; it.punit = pr.unit; it.name = pr.name; it.cat = pr.cat || '' } });
+    return;
+  }
+  const [pr, pk, st] = await Promise.all([dbList('products'), dbList('packages'), dbList('settings')]);
+  S.products = pr.sort((a,b) => (a.cat||'').localeCompare(b.cat||'','bn') || a.name.localeCompare(b.name,'bn'));
+  S.packages = pk.sort((a,b) => (a.members||0) - (b.members||0));
+  const m = st.find(x => x.id === 'main'); if(m) S.settings = {...S.settings, ...m};
+  document.title = S.settings.brand;
+}
+async function loadOrdersAdmin(){ try{S.orders = await dbList('orders',{orderBy:'createdAt',limit:300})}catch(e){toast('অর্ডার লোড হয়নি: '+(e.code||e.message))} }
+async function loadMine(){
+  if(user){ try{S.myOrders = (await dbList('orders',{where:['uid','==',user.uid]})).sort((a,b)=>b.createdAt-a.createdAt).slice(0,10)}catch(e){S.myOrders=[]} }
+  else S.myOrders = LS.get('myorders', []);
+}
+
+/* ---------- লগইন ---------- */
+async function login(asAdmin){
+  if(DEMO){
+    user = asAdmin ? {uid:'demo-admin', name:'ডেমো অ্যাডমিন', email:ADMIN_EMAILS[0]} : {uid:'demo-user', name:'ডেমো গ্রাহক', email:'demo@example.com'};
+    LS.set('d_user', user); await onAuth(); return;
+  }
+  try{ await fb.Au.signInWithPopup(fb.auth, new fb.Au.GoogleAuthProvider()) }
+  catch(e){ toast('লগইন হয়নি: ' + (e.code || e.message)) }
+}
+async function logout(){
+  if(DEMO){ user = null; LS.del('d_user'); await onAuth(); return }
+  await fb.Au.signOut(fb.auth);
+}
+async function onAuth(){
+  await loadMine();
+  if(S.view === 'admin' && isAdmin()){ await loadOrdersAdmin() }
+  render();
+}
+
+/* ---------- হেল্পার ---------- */
+function pkItems(p){
+  return (p.items||[]).map(pi => {
+    const pr = S.products.find(x => x.id === pi.pid);
+    if(pr && pr.active === false) return null;
+    return {pid:pr?pr.id:null, name:pr?pr.name:pi.name, cat:pr?(pr.cat||''):'', brand:pi.brand||'', qty:pi.qty, unit:pi.unit, punit:pr?pr.unit:null, price:pr?(pr.price||0):0};
+  }).filter(Boolean);
+}
+function totals(list){
+  let sum = 0, pending = false;
+  list.forEach(it => { const t = lineTotal(it); if(t == null) pending = true; else sum += t; });
+  return {sum, pending};
+}
+function waNum(p){ let d = String(p||'').replace(/\D/g,''); if(d.startsWith('01')) d = '88'+d; return d }
+function orderText(o){
+  const L = o.items.map((x,i) => `${i+1}. ${x.name}${x.brand?` (${x.brand})`:''} - ${x.qty} ${x.unit}${x.total!=null?` = ৳${fmt(x.total)}`:''}`);
+  const pend = o.items.some(x => x.total == null);
+  return [`*${S.settings.brand} - নতুন অর্ডার*`, `অর্ডার নং: ${o.orderNo}`, '', ...L, '',
+    o.total ? `আনুমানিক মোট: ৳${fmt(o.total)}${pend?' + দাম বাকি পণ্য':''}` : 'মোট: দাম নিশ্চিত করা হবে', '',
+    `নাম: ${o.name}`, `মোবাইল: ${o.phone}`, `ঠিকানা: ${o.address}`, `ডেলিভারি: ${o.day}`, o.note ? `নোট: ${o.note}` : ''].filter((l,i,a) => !(l==='' && a[i-1]==='')).join('\n').trim();
+}
+const when = ms => new Date(ms).toLocaleString('bn-BD', {dateStyle:'medium', timeStyle:'short'});
+
+/* ---------- রেন্ডার: মূল ---------- */
+function render(){
+  $('#app').innerHTML = header() + (S.view === 'admin' ? adminView() : homeView()) + footer();
+  if(S.view === 'home'){ renderList(); applyFilter(); updateSum() }
+  renderModal();
+}
+function header(){
+  return `<header><div class="wrap hd"><div><b>${esc(S.settings.brand)}</b><small>${esc(S.settings.tagline||'')}</small></div>
+  <div>${STATIC ? '' : user ? `<small style="color:#fff">${esc(user.name)}</small> <button data-act="logout">লগআউট</button>` : `<button data-act="login">Google লগইন</button>`}</div></div></header>
+  ${DEMO && !STATIC ? '<div class="demo">ডেমো মোড: ডেটা শুধু এই ফোনেই থাকছে। Firebase যুক্ত করলে আসল সিস্টেম চালু হবে।</div>' : ''}`;
+}
+function footer(){
+  if(STATIC) return '<footer></footer>';
+  return S.view === 'admin' ? `<footer><a href="#">← গ্রাহক পেজে ফিরুন</a></footer>` : `<footer><a href="#admin">ব্যবসায়ী লগইন</a></footer>`;
+}
+
+/* ---------- গ্রাহক পেজ ---------- */
+function pkCard(p){
+  const items = pkItems(p), t = totals(items);
+  const est = items.length && t.sum ? `৳${fmt(t.sum)}${t.pending?'+':''}` : 'দাম পরে নিশ্চিত হবে';
+  return `<div class="pkc"><b>${esc(p.name)}</b><small>${fmt(p.members||0)} জনের পরিবার</small><small>${fmt(items.length)}টি পণ্য · ${est}</small><button data-act="pick" data-id="${esc(p.id)}">এই প্যাকেজ নিন</button></div>`;
+}
+function homeView(){
+  const pk = S.packages.filter(p => p.active !== false);
+  const cats = [...new Set(S.products.map(p => p.cat).filter(Boolean))];
+  const c = S.cust;
+  const days = ['যত দ্রুত সম্ভব','আগামীকাল','সপ্তাহের শেষে','মাসের শুরুতে'];
+  return `<main class="wrap">
+  <section class="welcome"><div><b>আপনার মাসের বাজার, এক জায়গায়</b><small>পণ্য বাছুন, তালিকা তৈরি করুন—অর্ডার দিন সহজেই।</small></div><span>🛍️</span></section>
+  ${S.settings.note ? `<div class="note">${esc(S.settings.note)}</div>` : ''}
+  <h2>পরিবারের সদস্য অনুযায়ী প্যাকেজ</h2>
+  <div class="pk">${pk.length ? pk.map(pkCard).join('') : '<p class="mut">এখনো কোনো প্যাকেজ নেই। নিচে নিজে পণ্য বেছে নিন।</p>'}</div>
+  <div class="sech"><h2>পণ্য তালিকা <small id="pn"></small></h2><button class="lnk" data-act="reset">রিসেট</button></div>
+  <div class="flt"><input id="q" placeholder="🔍 পণ্য খুঁজুন..."><select id="cat"><option value="">সব ক্যাটাগরি</option>${cats.map(x => `<option>${esc(x)}</option>`).join('')}</select></div>
+  <div id="listBox"></div>
+  <h2>সব পণ্য <small>(ক্যাটাগরি অনুযায়ী, ট্যাপ করে যোগ করুন)</small></h2>
+  <div id="catBox">${catalogHTML()}</div>
+  <button class="btn2" data-act="addp">🔍 নাম লিখে খুঁজুন / নিজে লিখে যোগ করুন</button>
+  <h2>আপনার তথ্য</h2>
+  <label>নাম</label><input data-c="name" value="${esc(c.name)}" autocomplete="name">
+  <label>মোবাইল নম্বর</label><input data-c="phone" type="tel" value="${esc(c.phone)}" autocomplete="tel">
+  <label>ঠিকানা</label><textarea data-c="address" rows="2">${esc(c.address)}</textarea>
+  <label>ডেলিভারির দিন</label><select data-c="day">${days.map(d => `<option ${d===c.day?'selected':''}>${d}</option>`).join('')}</select>
+  <label>বিশেষ নোট (ঐচ্ছিক)</label><textarea data-c="note" rows="2">${esc(c.note)}</textarea>
+  <div class="sum" id="sumBox"></div>
+  <div class="two"><button class="btn sec" data-act="copy">অর্ডার কপি</button><button class="btn sec" data-act="dl">ডাউনলোড</button></div>
+  ${S.myOrders.length ? `<h2>আপনার আগের অর্ডার</h2>${S.myOrders.slice(0,5).map(myOrderCard).join('')}` : ''}
+  
+  </main>
+  <div class="bottom"><div class="wrap"><div class="tt"><span id="cnt"></span><b id="tot"></b></div><button class="wa" data-act="wa">হোয়াটসঅ্যাপে অর্ডার</button></div></div>`;
+}
+function myOrderCard(o){
+  return `<div class="oc"><div class="oh"><b>${esc(o.orderNo)}</b><small>${when(o.createdAt)}</small></div>
+  <div>${fmt(o.items.length)}টি পণ্য${o.total ? ' · ৳'+fmt(o.total) : ''} ${o.status ? `<span class="badge">${esc(o.status)}</span>` : ''}</div>
+  <button class="lnk" data-act="reorder" data-id="${esc(o.id||o.orderNo)}">আবার অর্ডার করুন</button></div>`;
+}
+function productEmoji(cat,name){
+  const s=(cat+' '+name).toLowerCase();
+  if(/চাল|আটা|ময়দা|ডাল|ছোলা|সুজি/.test(s)) return '🌾';
+  if(/তেল|ঘি/.test(s)) return '🫙';
+  if(/চিনি|লবণ|মসলা|হলুদ|মরিচ/.test(s)) return '🧂';
+  if(/সাবান|শ্যাম্পু|টুথপেস্ট|ব্রাশ/.test(s)) return '🧼';
+  if(/টিস্যু|ডিটারজেন্ট|পাউডার/.test(s)) return '🧺';
+  if(/নুডলস|সেমাই|বিস্কুট/.test(s)) return '🍜';
+  if(/পেঁয়াজ|রসুন|আদা|আলু/.test(s)) return '🧅';
+  if(/ডিম/.test(s)) return '🥚';
+  return '🛒';
+}
+function renderList(){
+  const box = $('#listBox'); if(!box) return;
+  $('#pn').textContent = S.pkgName ? `(${S.pkgName})` : '';
+  if(!S.list.length){ box.innerHTML = '<div class="empty"><span>🧺</span><b>আপনার বাজারের তালিকা এখনো খালি</b><small>নিচের পণ্য থেকে যোগ করুন অথবা পরিবারের প্যাকেজ বেছে নিন।</small></div>'; return }
+  box.innerHTML = S.list.map((it,i) => {
+    const pr = S.products.find(p => p.id === it.pid), brands = (pr && pr.brands) || [];
+    return `<div class="row market-row" data-i="${i}" data-name="${esc(it.name)}" data-cat="${esc(it.cat||'')}">
+    <div class="r1"><span class="prod-icon">${productEmoji(it.cat,it.name)}</span><span class="no">${fmt(i+1)}</span><b>${esc(it.name)}</b><button data-act="del" title="মুছুন" aria-label="মুছুন">✕</button></div>
+    <div class="r2"><input data-f="brand" list="bl${i}" placeholder="ব্র্যান্ড বাছুন (ঐচ্ছিক)" value="${esc(it.brand)}"><datalist id="bl${i}">${brands.map(b => `<option value="${esc(b)}">`).join('')}</datalist></div>
+    <div class="r3"><div class="q"><button data-act="dec">−</button><input data-f="qty" type="number" inputmode="decimal" min="0" step="${stepOf(it.unit)}" value="${it.qty}"><button data-act="inc">+</button></div>
+    <select data-f="unit">${unitOpts(it.unit, it.unit, !it.punit)}</select><div class="lt" id="lt${i}"></div></div></div>`;
+  }).join('');
+  S.list.forEach((_,i) => updateLine(i));
+}
+function updateLine(i){
+  const it = S.list[i], el = $('#lt'+i); if(!el) return;
+  const t = lineTotal(it);
+  el.className = 'lt' + (t == null ? ' p' : '');
+  el.textContent = t != null ? '৳' + fmt(t) : 'দাম পরে নিশ্চিত হবে';
+}
+function updateSum(){
+  const t = totals(S.list); markCatalog();
+  if($('#cnt')) $('#cnt').textContent = `${fmt(S.list.length)}টি পণ্য`;
+  if($('#tot')) $('#tot').textContent = S.list.length ? (t.sum ? `৳${fmt(t.sum)}${t.pending?' + দাম বাকি':''}` : 'দাম নিশ্চিত হবে') : '';
+  const box = $('#sumBox'); if(!box) return;
+  box.innerHTML = S.list.length ? `<div class="oh"><span>মোট পণ্য</span><b>${fmt(S.list.length)}টি</b></div>
+  <div class="oh"><span>আনুমানিক মোট</span><b>${t.sum ? '৳'+fmt(t.sum) : 'দাম পরে নিশ্চিত হবে'}</b></div>
+  <small>দাম বাজারদর অনুযায়ী বদলাতে পারে। চূড়ান্ত দাম WhatsApp-এ নিশ্চিত করা হবে।</small>` : '<small>এখনো কোনো পণ্য নেই।</small>';
+}
+function applyFilter(){
+  const q = ($('#q')?.value || '').trim().toLowerCase(), c = $('#cat')?.value || '';
+  const match = r => (!q || r.dataset.name.toLowerCase().includes(q)) && (!c || r.dataset.cat === c);
+  document.querySelectorAll('#listBox .row').forEach(r => r.classList.toggle('hide', !match(r)));
+  document.querySelectorAll('#catBox .cg').forEach(g => {
+    let n = 0;
+    g.querySelectorAll('.pi').forEach(r => { const ok = match(r); r.classList.toggle('hide', !ok); if(ok) n++ });
+    g.hidden = !n; if(q && n) g.open = true;
+  });
+}
+function catalogHTML(){
+  const act = S.products.filter(p => p.active !== false), cats = [];
+  act.forEach(p => { const c = p.cat || 'অন্যান্য'; if(!cats.includes(c)) cats.push(c) });
+  if(!cats.length) return '<p class="mut">এখনো কোনো পণ্য যোগ হয়নি।</p>';
+  return cats.map((c,k) => {
+    const L = act.filter(p => (p.cat || 'অন্যান্য') === c);
+    return `<details class="cg" ${k===0?'open':''}><summary><span>${esc(c)}</span><small>${fmt(L.length)}টি পণ্য</small></summary><div class="catalog-grid">${L.map(p => `<div class="pi product-card" data-name="${esc(p.name)}" data-cat="${esc(p.cat||'')}"><span class="prod-icon">${productEmoji(p.cat,p.name)}</span><div class="product-info"><b>${esc(p.name)}</b><small>${p.price ? '৳'+fmt(p.price)+' / '+esc(p.unit) : esc(p.unit)+' · দাম পরে নিশ্চিত হবে'}</small></div><button class="btn cb" data-act="padd" data-id="${esc(p.id)}" data-pid="${esc(p.id)}" aria-label="${esc(p.name)} যোগ করুন">+</button></div>`).join('')}</div></details>`;
+  }).join('');
+}
+function markCatalog(){
+  document.querySelectorAll('#catBox [data-pid]').forEach(b => {
+    const inl = S.list.some(x => x.pid === b.dataset.pid);
+    b.classList.toggle('in', inl); b.textContent = inl ? '✓ আছে · আরও' : '+ যোগ';
+  });
+}
+
+/* ---------- অর্ডার পাঠানো ---------- */
+function buildOrder(){
+  const items = S.list.map(it => ({name:it.name, brand:it.brand||'', qty:it.qty, unit:it.unit, price:it.price||0, total:lineTotal(it)}));
+  return {orderNo:'MB-'+new Date().toISOString().slice(2,10).replace(/-/g,'')+'-'+Math.floor(1000+Math.random()*9000),
+    uid:user?user.uid:null, email:user?(user.email||null):null, name:S.cust.name.trim(), phone:S.cust.phone.trim(), address:S.cust.address.trim(),
+    day:S.cust.day, note:S.cust.note.trim(), items, total:totals(S.list).sum, status:'নতুন', createdAt:Date.now()};
+}
+function validate(){
+  if(!S.list.length){ toast('আগে অন্তত একটি পণ্য যোগ করুন'); return false }
+  if(S.list.some(it => !(it.qty > 0))){ toast('সব পণ্যের পরিমাণ ০-এর বেশি দিন'); return false }
+  if(!S.cust.name.trim() || !S.cust.phone.trim() || !S.cust.address.trim()){ toast('নাম, মোবাইল ও ঠিকানা দিন'); return false }
+  if(waNum(S.cust.phone).length < 11){ toast('সঠিক মোবাইল নম্বর দিন'); return false }
+  return true;
+}
+async function saveOrder(o){
+  const id = nid();
+  if(!STATIC) await dbSet('orders', id, o);
+  const mine = LS.get('myorders', []); mine.unshift({...o, id}); LS.set('myorders', mine.slice(0, 20));
+  if(user) loadMine();
+}
+async function submit(mode){
+  if(!validate()) return;
+  const o = buildOrder(), text = orderText(o);
+  if(mode === 'copy'){ try{await navigator.clipboard.writeText(text); toast('অর্ডার কপি হয়েছে')}catch(e){toast('কপি করা যায়নি')} return }
+  if(mode === 'dl'){
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type:'text/plain;charset=utf-8'}));
+    a.download = `order-${o.orderNo}.txt`; a.click(); return;
+  }
+  toast('অর্ডার সংরক্ষণ হচ্ছে...');
+  let saved = true;
+  try{ await Promise.race([saveOrder(o), new Promise((_,rej) => setTimeout(() => rej(new Error('timeout')), 6000))]) }
+  catch(e){ saved = false }
+  if(!saved) toast('সার্ভারে সংরক্ষণ হয়নি, WhatsApp-এ পাঠিয়ে দিন');
+  window.location.href = `https://wa.me/${waNum(S.settings.whatsapp)}?text=${encodeURIComponent(text)}`;
+}
+
+/* ---------- অ্যাডমিন ---------- */
+function adminView(){
+  if(!user) return `<main class="wrap"><h2>ব্যবসায়ী লগইন</h2><p class="mut">অ্যাডমিন প্যানেলে ঢুকতে আপনার Google অ্যাকাউন্ট দিয়ে লগইন করুন।</p>
+    <button class="btn" data-act="${DEMO?'adminlogin':'login'}">${DEMO?'ডেমো অ্যাডমিন লগইন':'Google দিয়ে লগইন'}</button></main>`;
+  if(!isAdmin()) return `<main class="wrap"><h2>অনুমতি নেই</h2><p class="mut">${esc(user.email)} অ্যাডমিন হিসেবে যুক্ত নয়।</p><button class="btn" data-act="logout">লগআউট</button></main>`;
+  const tabs = [['orders','অর্ডার'],['packages','প্যাকেজ'],['products','পণ্য'],['settings','সেটিংস']];
+  return `<main class="wrap"><div class="tabs">${tabs.map(([k,v]) => `<button class="${S.tab===k?'on':''}" data-act="tab" data-k="${k}">${v}</button>`).join('')}</div>${adminTab()}</main>`;
+}
+function adminTab(){
+  if(S.tab === 'orders'){
+    const L = S.orders.filter(o => !S.ofilter || o.status === S.ofilter);
+    return `<div class="two"><select id="of"><option value="">সব অর্ডার (${fmt(S.orders.length)})</option>${STATUSES.map(s => `<option ${s===S.ofilter?'selected':''}>${s}</option>`).join('')}</select><button class="btn sec" data-act="orefresh">রিফ্রেশ</button></div><br>
+    ${L.length ? L.map(orderCard).join('') : '<p class="mut">কোনো অর্ডার নেই।</p>'}`;
+  }
+  if(S.tab === 'packages'){
+    return `<button class="btn" data-act="pknew">+ নতুন প্যাকেজ</button><br><br>${S.packages.length ? S.packages.map(p => `<div class="oc"><div class="oh"><b>${esc(p.name)}</b><span class="badge">${p.active===false?'লুকানো':'চালু'}</span></div>
+      <div>${fmt(p.members||0)} জনের পরিবার · ${fmt((p.items||[]).length)}টি পণ্য</div>
+      <div class="two"><button class="btn sec" data-act="pkedit" data-id="${esc(p.id)}">এডিট</button><button class="btn red" data-act="pkdel" data-id="${esc(p.id)}">মুছুন</button></div></div>`).join('') : '<p class="mut">কোনো প্যাকেজ নেই। প্রথমে "পণ্য" ট্যাবে পণ্য যোগ করুন।</p>'}`;
+  }
+  if(S.tab === 'products'){
+    return `<div class="two"><button class="btn" data-act="pnew">+ নতুন পণ্য</button>${S.products.length ? '' : '<button class="btn sec" data-act="seed">স্টার্টার তালিকা</button>'}</div><br>
+    ${S.products.map(p => `<div class="pi"><div><b>${esc(p.name)}</b> <small>${esc(p.cat||'')} · ${p.price ? '৳'+fmt(p.price)+' / '+esc(p.unit) : esc(p.unit)+' · দাম নেই'}${p.active===false?' · লুকানো':''}</small></div>
+      <div><button class="lnk" data-act="pedit" data-id="${esc(p.id)}">এডিট</button> <button class="lnk" style="color:var(--r)" data-act="pdel" data-id="${esc(p.id)}">মুছুন</button></div></div>`).join('')}`;
+  }
+  const s = S.settings;
+  return `<h3>সেটিংস</h3><label>ব্র্যান্ডের নাম</label><input data-e="brand" value="${esc(s.brand)}">
+  <label>ট্যাগলাইন</label><input data-e="tagline" value="${esc(s.tagline||'')}">
+  <label>WhatsApp নম্বর (৮৮০১...)</label><input data-e="whatsapp" value="${esc(s.whatsapp)}">
+  <label>গ্রাহকদের জন্য নোটিশ (ডেলিভারি এলাকা, ফি ইত্যাদি)</label><textarea data-e="note" rows="3">${esc(s.note||'')}</textarea>
+  <div class="mb"><button class="btn" data-act="setsave">সংরক্ষণ</button></div>`;
+}
+function orderCard(o){
+  const pend = o.items.some(x => x.total == null);
+  return `<div class="oc"><div class="oh"><b>${esc(o.orderNo)}</b><small>${when(o.createdAt)}</small></div>
+  <div>${esc(o.name)} · <a href="tel:${esc(o.phone)}">${esc(o.phone)}</a> · <a target="_blank" rel="noopener" href="https://wa.me/${waNum(o.phone)}">WhatsApp</a></div>
+  <div>${esc(o.address)}<br><small>ডেলিভারি: ${esc(o.day)}${o.note ? ' · নোট: '+esc(o.note) : ''}</small></div>
+  <ul>${o.items.map(x => `<li>${esc(x.name)}${x.brand ? ' ('+esc(x.brand)+')' : ''} - ${esc(x.qty)} ${esc(x.unit)}${x.total != null ? ' = ৳'+fmt(x.total) : ''}</li>`).join('')}</ul>
+  <b>${o.total ? 'আনুমানিক ৳'+fmt(o.total)+(pend?' + দাম বাকি':'') : 'দাম নিশ্চিত করতে হবে'}</b>
+  <div class="two"><select data-act="ostatus" data-id="${esc(o.id)}">${STATUSES.map(s => `<option ${s===o.status?'selected':''}>${s}</option>`).join('')}</select>
+  <button class="btn sec" data-act="ocopy" data-id="${esc(o.id)}">কপি</button><button class="btn red" data-act="odel" data-id="${esc(o.id)}">মুছুন</button></div></div>`;
+}
+
+/* ---------- মোডাল ---------- */
+function renderModal(){
+  const root = $('#mdroot'); let h = '';
+  if(S.picker) h = pickerModal();
+  else if(S.edit) h = S.edit.type === 'pkg' ? pkgModal(S.edit.d) : prodModal(S.edit.d);
+  root.innerHTML = h ? `<div class="ov"><div class="md">${h}</div></div>` : '';
+}
+function pickerModal(){
+  return `<h3>পণ্য যোগ করুন</h3><input id="pq" placeholder="🔍 খুঁজুন...">
+  <div id="pl">${S.products.filter(p => p.active !== false).map(p => `<div class="pi" data-name="${esc(p.name)}"><div><b>${esc(p.name)}</b> <small>${esc(p.cat||'')}</small></div><button class="btn" data-act="padd" data-id="${esc(p.id)}">যোগ</button></div>`).join('') || '<p class="mut">কোনো পণ্য নেই।</p>'}</div>
+  <h4>তালিকায় নেই? নিজে লিখুন</h4><div class="two"><input id="cu" placeholder="পণ্যের নাম"><button class="btn" data-act="cadd">যোগ</button></div>
+  <div class="mb"><button class="btn sec" data-act="closem">বন্ধ করুন</button></div>`;
+}
+function pkgModal(d){
+  return `<h3>${d.id ? 'প্যাকেজ এডিট' : 'নতুন প্যাকেজ'}</h3>
+  <label>প্যাকেজের নাম</label><input data-e="name" value="${esc(d.name)}" placeholder="যেমন: ২ জনের পরিবার">
+  <label>কত জনের পরিবার</label><input data-e="members" type="number" min="1" value="${esc(d.members)}">
+  <label><input type="checkbox" data-e="active" ${d.active !== false ? 'checked' : ''}> গ্রাহকদের দেখাবে</label>
+  <h4>পণ্যের তালিকা</h4>
+  ${d.items.map((it,i) => `<div class="ir"><div class="f"><select data-ei="${i}" data-ef="pid"><option value="">পণ্য বাছুন</option>${S.products.map(p => `<option value="${esc(p.id)}" ${p.id===it.pid?'selected':''}>${esc(p.name)}</option>`).join('')}</select></div>
+  <input data-ei="${i}" data-ef="brand" placeholder="ব্র্যান্ড (ঐচ্ছিক)" value="${esc(it.brand||'')}">
+  <input data-ei="${i}" data-ef="qty" type="number" step="any" min="0" value="${esc(it.qty)}">
+  <select data-ei="${i}" data-ef="unit">${unitOpts(it.unit, it.unit, false)}</select><button class="btn red" data-act="pkitemdel" data-i="${i}">মুছুন</button></div>`).join('')}
+  <button class="btn2" data-act="pkitemadd">+ পণ্য যোগ</button>
+  <div class="mb"><button class="btn" data-act="pksave">সংরক্ষণ</button><button class="btn sec" data-act="closem">বাতিল</button></div>`;
+}
+function prodModal(d){
+  return `<h3>${d.id ? 'পণ্য এডিট' : 'নতুন পণ্য'}</h3>
+  <label>পণ্যের নাম</label><input data-e="name" value="${esc(d.name)}">
+  <label>ক্যাটাগরি</label><input data-e="cat" value="${esc(d.cat||'')}" placeholder="যেমন: চাল-ডাল">
+  <label>দামের একক (এই এককে দাম ধরা হবে)</label><select data-e="unit">${unitOpts(d.unit, d.unit, true)}</select>
+  <label>প্রতি একক দাম (টাকা, না জানলে ০)</label><input data-e="price" type="number" min="0" step="any" value="${esc(d.price||0)}">
+  <label>ব্র্যান্ডের তালিকা (কমা দিয়ে আলাদা করুন)</label><textarea data-e="brandsText" rows="2">${esc(d.brandsText||'')}</textarea>
+  <label><input type="checkbox" data-e="active" ${d.active !== false ? 'checked' : ''}> চালু (গ্রাহকরা দেখবে)</label>
+  <div class="mb"><button class="btn" data-act="psave">সংরক্ষণ</button><button class="btn sec" data-act="closem">বাতিল</button></div>`;
+}
+
+/* ---------- স্টার্টার ডেটা ---------- */
+const STARTER = [
+ ['চাল','চাল-ডাল','কেজি'],['মসুর ডাল','চাল-ডাল','কেজি'],['মুগ ডাল','চাল-ডাল','কেজি'],['ছোলা','চাল-ডাল','কেজি'],
+ ['আটা','চাল-ডাল','কেজি'],['ময়দা','চাল-ডাল','কেজি'],['সুজি','চাল-ডাল','কেজি'],
+ ['সয়াবিন তেল','তেল-মসলা','লিটার'],['চিনি','তেল-মসলা','কেজি'],['লবণ','তেল-মসলা','কেজি'],
+ ['হলুদ গুঁড়া','তেল-মসলা','গ্রাম'],['মরিচ গুঁড়া','তেল-মসলা','গ্রাম'],['জিরা','তেল-মসলা','গ্রাম'],['ধনিয়া গুঁড়া','তেল-মসলা','গ্রাম'],
+ ['পেঁয়াজ','সবজি','কেজি'],['রসুন','সবজি','কেজি'],['আদা','সবজি','কেজি'],['আলু','সবজি','কেজি'],['ডিম','সবজি','হালি'],
+ ['সাবান','পরিষ্কার-পরিচ্ছন্নতা','পিস'],['ডিটারজেন্ট পাউডার','পরিষ্কার-পরিচ্ছন্নতা','কেজি'],['থালা-বাসন মাজার লিকুইড','পরিষ্কার-পরিচ্ছন্নতা','পিস']
+];
+async function seed(withPackages){
+  const ids = {};
+  for(const [name, cat, unit] of STARTER){ const id = nid(); ids[name] = id; await dbSet('products', id, {name, cat, unit, price:0, brands:[], active:true}) }
+  if(withPackages){
+    const mk = (name, members, rows) => dbSet('packages', nid(), {name, members, active:true, items:rows.map(([n,q,u]) => ({pid:ids[n], name:n, brand:'', qty:q, unit:u}))});
+    await mk('নমুনা: ২ জনের পরিবার', 2, [['চাল',10,'কেজি'],['মসুর ডাল',1,'কেজি'],['সয়াবিন তেল',2,'লিটার'],['চিনি',1,'কেজি'],['হলুদ গুঁড়া',100,'গ্রাম'],['মরিচ গুঁড়া',100,'গ্রাম']]);
+    await mk('নমুনা: ৪ জনের পরিবার', 4, [['চাল',20,'কেজি'],['মসুর ডাল',2,'কেজি'],['সয়াবিন তেল',4,'লিটার'],['চিনি',2,'কেজি'],['আটা',2,'কেজি'],['হলুদ গুঁড়া',200,'গ্রাম'],['মরিচ গুঁড়া',200,'গ্রাম']]);
+  }
+}
+
+/* ---------- ইভেন্ট ---------- */
+/* ---------- ধরে টেনে সাজানো (☰ চিহ্ন ধরে রাখুন) ---------- */
+let drag = null;
+document.addEventListener('pointerdown', e => {
+  const h = e.target.closest('.dh'); if(!h) return;
+  const row = h.closest('.row'); e.preventDefault();
+  drag = {row, y0:e.clientY, s0:window.scrollY, idx:+row.dataset.i, target:null};
+  row.classList.add('drag');
+});
+document.addEventListener('pointermove', e => {
+  if(!drag) return;
+  if(e.clientY < 90) window.scrollBy(0, -14); else if(e.clientY > window.innerHeight - 150) window.scrollBy(0, 14);
+  drag.row.style.transform = `translateY(${(e.clientY - drag.y0) + (window.scrollY - drag.s0)}px)`;
+  const rect = drag.row.getBoundingClientRect(), mid = rect.top + rect.height / 2;
+  const others = [...document.querySelectorAll('#listBox .row')].filter(r => r !== drag.row && !r.classList.contains('hide'));
+  others.forEach(r => r.classList.remove('ins', 'ins-end'));
+  drag.target = null;
+  for(const r of others){ const b = r.getBoundingClientRect(); if(mid < b.top + b.height / 2){ drag.target = r; break } }
+  if(drag.target) drag.target.classList.add('ins'); else if(others.length) others[others.length-1].classList.add('ins-end');
+});
+function endDrag(){
+  if(!drag) return;
+  const d = drag; drag = null;
+  d.row.style.transform = ''; d.row.classList.remove('drag');
+  document.querySelectorAll('#listBox .row').forEach(r => r.classList.remove('ins', 'ins-end'));
+  const arr = S.list.map((_, i) => i).filter(i => i !== d.idx);
+  const pos = d.target ? arr.indexOf(+d.target.dataset.i) : arr.length;
+  arr.splice(pos, 0, d.idx);
+  S.list = arr.map(i => S.list[i]);
+  saveDraft(); renderList(); applyFilter(); updateSum();
+}
+document.addEventListener('pointerup', endDrag);
+document.addEventListener('pointercancel', endDrag);
+
+document.addEventListener('click', async ev => {
+  const b = ev.target.closest('[data-act]'); if(!b || b.tagName === 'SELECT') return;
+  const act = b.dataset.act, row = b.closest('.row'), i = row ? +row.dataset.i : -1;
+  try{
+  switch(act){
+    case 'login': return login(false);
+    case 'adminlogin': return login(true);
+    case 'logout': return logout();
+    case 'pick': {
+      const p = S.packages.find(x => x.id === b.dataset.id); if(!p) return;
+      if(S.list.length && !confirm('বর্তমান তালিকা বদলে যাবে। চালিয়ে যাবেন?')) return;
+      S.list = pkItems(p); S.pkgName = p.name; saveDraft(); renderList(); applyFilter(); updateSum();
+      $('#listBox').scrollIntoView({behavior:'smooth'}); return;
+    }
+    case 'reset': if(!S.list.length || confirm('পুরো তালিকা মুছে ফেলবেন?')){ S.list = []; S.pkgName = ''; saveDraft(); renderList(); updateSum() } return;
+    case 'addp': S.picker = true; return renderModal();
+    case 'closem': S.picker = false; S.edit = null; return renderModal();
+    case 'padd': {
+      const p = S.products.find(x => x.id === b.dataset.id); if(!p) return;
+      const ex = S.list.find(x => x.pid === p.id);
+      if(ex){ ex.qty = r3(ex.qty + stepOf(ex.unit)); toast(p.name + ': পরিমাণ বাড়ানো হয়েছে') }
+      else{ S.list.push({pid:p.id, name:p.name, cat:p.cat||'', brand:'', qty:1, unit:p.unit, punit:p.unit, price:p.price||0}); toast(p.name + ' যোগ হয়েছে') }
+      saveDraft(); renderList(); applyFilter(); updateSum(); return;
+    }
+    case 'cadd': {
+      const n = $('#cu').value.trim(); if(!n) return;
+      S.list.push({pid:null, name:n, cat:'', brand:'', qty:1, unit:'পিস', punit:null, price:0}); $('#cu').value = '';
+      toast(n + ' যোগ হয়েছে'); saveDraft(); renderList(); applyFilter(); updateSum(); return;
+    }
+    case 'del': S.list.splice(i,1); saveDraft(); renderList(); applyFilter(); updateSum(); return;
+    case 'inc': case 'dec': {
+      const it = S.list[i], s = stepOf(it.unit);
+      it.qty = act === 'inc' ? r3(it.qty + s) : Math.max(s, r3(it.qty - s));
+      row.querySelector('[data-f=qty]').value = it.qty; updateLine(i); updateSum(); saveDraft(); return;
+    }
+    case 'wa': return submit('wa');
+    case 'copy': return submit('copy');
+    case 'dl': return submit('dl');
+    case 'reorder': {
+      const o = S.myOrders.find(x => (x.id || x.orderNo) === b.dataset.id); if(!o) return;
+      if(S.list.length && !confirm('বর্তমান তালিকা বদলে যাবে। চালিয়ে যাবেন?')) return;
+      S.list = o.items.map(x => { const p = S.products.find(q => q.name === x.name); return {pid:p?p.id:null, name:x.name, cat:p?(p.cat||''):'', brand:x.brand||'', qty:x.qty, unit:x.unit, punit:p?p.unit:null, price:p?(p.price||0):0} });
+      S.pkgName = 'আগের অর্ডার'; saveDraft(); renderList(); applyFilter(); updateSum(); $('#listBox').scrollIntoView({behavior:'smooth'}); return;
+    }
+    /* অ্যাডমিন */
+    case 'tab': S.tab = b.dataset.k; return render();
+    case 'orefresh': await loadOrdersAdmin(); return render();
+    case 'ocopy': { const o = S.orders.find(x => x.id === b.dataset.id); try{await navigator.clipboard.writeText(orderText(o)); toast('কপি হয়েছে')}catch(e){toast('কপি করা যায়নি')} return }
+    case 'odel': if(confirm('অর্ডারটি মুছে ফেলবেন?')){ await dbDel('orders', b.dataset.id); await loadOrdersAdmin(); render() } return;
+    case 'pknew': S.edit = {type:'pkg', d:{name:'', members:'', active:true, items:[]}}; return renderModal();
+    case 'pkedit': { const p = S.packages.find(x => x.id === b.dataset.id); S.edit = {type:'pkg', d:JSON.parse(JSON.stringify({items:[], ...p}))}; return renderModal() }
+    case 'pkitemadd': S.edit.d.items.push({pid:'', name:'', brand:'', qty:1, unit:'কেজি'}); return renderModal();
+    case 'pkitemdel': S.edit.d.items.splice(+b.dataset.i, 1); return renderModal();
+    case 'pksave': {
+      const d = S.edit.d;
+      if(!String(d.name).trim()) return toast('প্যাকেজের নাম দিন');
+      const items = d.items.filter(x => x.pid).map(x => ({pid:x.pid, name:x.name, brand:(x.brand||'').trim(), qty:+x.qty > 0 ? +x.qty : 1, unit:x.unit}));
+      if(!items.length) return toast('অন্তত একটি পণ্য যোগ করুন');
+      await dbSet('packages', d.id || nid(), {name:String(d.name).trim(), members:+d.members || 0, active:d.active !== false, items});
+      S.edit = null; await loadPublic(); toast('প্যাকেজ সংরক্ষিত'); return render();
+    }
+    case 'pkdel': if(confirm('প্যাকেজটি মুছবেন?')){ await dbDel('packages', b.dataset.id); await loadPublic(); render() } return;
+    case 'pnew': S.edit = {type:'prod', d:{name:'', cat:'', unit:'কেজি', price:0, brandsText:'', active:true}}; return renderModal();
+    case 'pedit': { const p = S.products.find(x => x.id === b.dataset.id); S.edit = {type:'prod', d:{...p, brandsText:(p.brands||[]).join(', ')}}; return renderModal() }
+    case 'psave': {
+      const d = S.edit.d; if(!String(d.name).trim()) return toast('পণ্যের নাম দিন');
+      await dbSet('products', d.id || nid(), {name:String(d.name).trim(), cat:(d.cat||'').trim(), unit:d.unit, price:+d.price || 0,
+        brands:String(d.brandsText||'').split(/[,،\n]/).map(x => x.trim()).filter(Boolean), active:d.active !== false});
+      S.edit = null; await loadPublic(); toast('পণ্য সংরক্ষিত'); return render();
+    }
+    case 'pdel': if(confirm('পণ্যটি মুছবেন? (প্যাকেজ থেকেও সরাতে হবে)')){ await dbDel('products', b.dataset.id); await loadPublic(); render() } return;
+    case 'seed': await seed(false); await loadPublic(); toast('স্টার্টার পণ্য যোগ হয়েছে (দাম ০, আপনি বসান)'); return render();
+    case 'setsave': {
+      const s = S.settings; await dbSet('settings', 'main', {brand:s.brand, tagline:s.tagline||'', whatsapp:String(s.whatsapp).replace(/\D/g,''), note:s.note||''});
+      toast('সেটিংস সংরক্ষিত'); document.title = s.brand; return;
+    }
+  }
+  }catch(e){ toast('সমস্যা: ' + (e.code || e.message)); console.error(e) }
+});
+document.addEventListener('input', ev => {
+  const t = ev.target;
+  if(t.id === 'q' || t.id === 'cat') return applyFilter();
+  if(t.id === 'pq'){ const q = t.value.trim().toLowerCase(); document.querySelectorAll('#pl .pi').forEach(r => r.classList.toggle('hide', !!q && !r.dataset.name.toLowerCase().includes(q))); return }
+  if(t.dataset.c){ S.cust[t.dataset.c] = t.value; LS.set('cust', S.cust); return }
+  const row = t.closest('.row');
+  if(row && t.dataset.f){
+    const it = S.list[+row.dataset.i];
+    if(t.dataset.f === 'brand') it.brand = t.value;
+    if(t.dataset.f === 'qty'){ it.qty = parseFloat(t.value) || 0; updateLine(+row.dataset.i); updateSum() }
+    return saveDraft();
+  }
+  if(t.dataset.ei !== undefined && t.dataset.ef !== 'pid' && t.dataset.ef !== 'unit'){ S.edit.d.items[+t.dataset.ei][t.dataset.ef] = t.value; return }
+  if(t.dataset.e){
+    const k = t.dataset.e, v = t.type === 'checkbox' ? t.checked : t.value;
+    if(S.edit) S.edit.d[k] = v; else S.settings[k] = v;
+  }
+});
+document.addEventListener('change', ev => {
+  const t = ev.target;
+  if(t.id === 'of'){ S.ofilter = t.value; return render() }
+  if(t.dataset.act === 'ostatus'){ dbPatch('orders', t.dataset.id, {status:t.value}).then(() => { const o = S.orders.find(x => x.id === t.dataset.id); if(o) o.status = t.value; toast('অবস্থা বদলেছে') }).catch(e => toast('সমস্যা: ' + (e.code || e.message))); return }
+  const row = t.closest('.row');
+  if(row && t.dataset.f === 'unit'){
+    const i = +row.dataset.i, it = S.list[i], a = UNITS[it.unit], b = UNITS[t.value];
+    if(a && b && a[0] === b[0]) it.qty = r3(it.qty * a[1] / b[1]);
+    it.unit = t.value; saveDraft();
+    const q = row.querySelector('[data-f=qty]'); q.value = it.qty; q.step = stepOf(it.unit); updateLine(i); updateSum(); return;
+  }
+  if(t.dataset.ei !== undefined){
+    const it = S.edit.d.items[+t.dataset.ei];
+    if(t.dataset.ef === 'pid'){ const p = S.products.find(x => x.id === t.value); it.pid = t.value; it.name = p ? p.name : ''; if(p) it.unit = p.unit; renderModal() }
+    else if(t.dataset.ef === 'unit') it.unit = t.value;
+    return;
+  }
+  if(t.dataset.c){ S.cust[t.dataset.c] = t.value; LS.set('cust', S.cust); return }
+  if(t.dataset.e){
+    const k = t.dataset.e, v = t.type === 'checkbox' ? t.checked : t.value;
+    if(S.edit) S.edit.d[k] = v; else S.settings[k] = v;
+  }
+});
+window.addEventListener('hashchange', async () => {
+  if(STATIC) return;
+  S.view = location.hash === '#admin' ? 'admin' : 'home';
+  if(S.view === 'admin' && isAdmin()) await loadOrdersAdmin();
+  render();
+});
+
+/* ---------- শুরু ---------- */
+(async function main(){
+  try{
+    await initBackend();
+    if(DEMO && !STATIC){
+      if(!Object.keys(LS.get('d_products', {})).length) await seed(true);
+      user = LS.get('d_user', null);
+    }
+    await loadPublic();
+    S.view = (!STATIC && location.hash === '#admin') ? 'admin' : 'home';
+    if(DEMO){ await onAuth() }
+    else{
+      let first = true;
+      fb.Au.onAuthStateChanged(fb.auth, async u => {
+        user = u ? {uid:u.uid, name:u.displayName || u.email, email:u.email} : null;
+        await onAuth(); first = false;
+      });
+      setTimeout(() => { if(!$('#app').innerHTML) render() }, 3000);
+    }
+  }catch(e){
+    console.error(e);
+    $('#app').innerHTML = `<main class="wrap"><h2>পেজ লোড হয়নি</h2><p class="mut">ইন্টারনেট চেক করে আবার চেষ্টা করুন।<br><small>${esc(e.code || e.message)}</small></p></main>`;
+  }
+})();
+</script>
+</body>
+</html>
